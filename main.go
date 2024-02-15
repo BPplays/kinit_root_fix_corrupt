@@ -80,7 +80,7 @@ func main() {
 
 				// chmod_r(dirPath, "700")
 
-				cmd := exec.Command("sudo", "-u", username, "kinit", "-k", "-t", keytabFile)
+				cmd := exec.Command("kinit", "-k", "-t", keytabFile)
 				cmd.Stdin = os.Stdin
 				cmd.Stdout = os.Stdout
 				cmd.Stderr = os.Stderr
