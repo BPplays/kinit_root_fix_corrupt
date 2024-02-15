@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -10,48 +9,20 @@ import (
 )
 
 
-func chown_r (file string, username string, group string) {
-	cmd := exec.Command("chown", fmt.Sprintf("%s:%s", username, group), "-R", file)
+
+func k_dest () {
+	cmd := exec.Command("kdestroy", "-A")
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
 	err := cmd.Run()
 	if err != nil {
-		log.Println("Error running chown for", file, ":", err)
+		log.Println("Error running kdestroy root", ":", err)
 	} else {
-		log.Println("chowned", file)
+		log.Println("kdestroy:", "root")
 	}
 }
-
-func k_dest (user string) {
-	cmd := exec.Command("sudo", "-u", user, "kdestroy", "-A")
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-
-	err := cmd.Run()
-	if err != nil {
-		log.Println("Error running kdestroy for", user, ":", err)
-	} else {
-		log.Println("kdestroy:", user)
-	}
-}
-
-func chmod_r (file string, perms string) {
-	cmd := exec.Command("chmod", perms, "-R", file)
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-
-	err := cmd.Run()
-	if err != nil {
-		log.Println("Error running chmod for", file, ":", err)
-	} else {
-		log.Println("chmoded", file)
-	}
-}
-
 
 
 func main() {
@@ -74,7 +45,7 @@ func main() {
 					break
 				}
 
-				username := "root"
+				// username := "root"
 
 				// chown_r(dirPath, username, username)
 
@@ -87,15 +58,15 @@ func main() {
 
 				out, err := cmd.CombinedOutput()
 				if string(out) == bad_msg {
-					k_dest(username)
+					k_dest()
 					loops += 1
 				} else {
 					break
 				}
 				if err != nil {
-					log.Println("Error running kinit for", username, ":", err)
+					log.Println("Error running kinit for", "root", ":", err)
 				} else {
-					log.Println("Ran kinit for", username)
+					log.Println("Ran kinit for", "root")
 				}
 			}
 		}
