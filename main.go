@@ -69,6 +69,8 @@ func main() {
 					log.Println("Ran kinit for", "root")
 				}
 			}
+		} else {
+			log.Println("keytab file error: ", err)
 		}
 		
 		
