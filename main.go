@@ -64,7 +64,7 @@ func main() {
 	// file := "/etc/krb5.keytab"
 	for {
 
-		dirPath := filepath.Join("/etc/krb5")
+		// dirPath := filepath.Join("/etc/krb5")
 		keytabFile := filepath.Join("/etc/krb5.keytab")
 
 		if _, err := os.Stat(keytabFile); err == nil {
@@ -76,9 +76,9 @@ func main() {
 
 				username := "root"
 
-				chown_r(dirPath, username, username)
+				// chown_r(dirPath, username, username)
 
-				chmod_r(dirPath, "700")
+				// chmod_r(dirPath, "700")
 
 				cmd := exec.Command("sudo", "-u", username, "kinit", "-k", "-t", keytabFile)
 				cmd.Stdin = os.Stdin
