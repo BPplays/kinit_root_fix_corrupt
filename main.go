@@ -29,6 +29,8 @@ func main() {
 	bad_msg := "kinit: Failed to store credentials: Internal credentials cache error while getting initial credentials"
 	var loops int64
 
+	log.Println("start")
+
 	log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
 
 
@@ -61,6 +63,7 @@ func main() {
 					k_dest()
 					loops += 1
 				} else {
+					log.Println("Ran kinit for", "root")
 					break
 				}
 				if err != nil {
